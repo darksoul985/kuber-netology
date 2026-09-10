@@ -1,4 +1,5 @@
 # 1. Задание
+
 `kubectl get pods`:
 ![kubectl_get_pods](kubectl_get_pods.png)
 
@@ -11,12 +12,14 @@
 ![curl_echoserver](curl_echoserver.png)
 
 # 2. Задание
-![[kubectl_get_po.png]]
 
-![[kubectl_get_svc_netology_svc.png]]
+![kube_ctl_po](kubectl_get_po.png)
 
-![[port_forward_service.png]]
+![kubectl_get_svc_netology_svc](kubectl_get_svc_netology_svc.png)
+
+![port_forward_service](port_forward_service.png)
 
 Манифесты:
+
 1. Pod - [[netology-web.yaml]]
 2. Service - [[netology-svc.yaml]]
