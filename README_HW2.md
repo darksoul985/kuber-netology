@@ -21,5 +21,5 @@
 
 Манифесты:
 
-1. Pod - [[netology-web.yaml]]
-2. Service - [[netology-svc.yaml]]
+1. Pod - [netology-web](netology-web.yaml)
+2. Service - [netology-svc](netology-svc.yaml)
