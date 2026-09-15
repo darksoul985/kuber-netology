@@ -5,17 +5,17 @@
 Запущен Depluyment с двумя репликами:
 ![2_replicas_deploy](2_replicas_deploy.png)
 
-deployment - [[dpl_ng_multitool.yaml]]
+[deployment](dpl_ng_multitool.yaml)
 
 Создан сервис для доступа к репликам приложений:
 ![service](service.png)
 
-service - [[service.yaml]]
+[service](service.yaml)\n
 
 Создан отдельный Pod с приложением curl и проверен доступ к приложениям:
 ![success_curl](success_curl.png)
 
-checker - [[checker.yaml]]
+[checker](checker.yaml)\n
 
 # Задание 2. Создать Deployment и обеспечить старт основного контейнера при выполнении условий
 
