@@ -10,17 +10,18 @@
 Создан сервис для доступа к репликам приложений:
 ![service](service.png)
 
-[service](service.yaml)\n
+[service](service.yaml)
 
 Создан отдельный Pod с приложением curl и проверен доступ к приложениям:
 ![success_curl](success_curl.png)
 
-[checker](checker.yaml)\n
+[checker](checker.yaml)
 
 # Задание 2. Создать Deployment и обеспечить старт основного контейнера при выполнении условий
 
 Nginx не стартует при отключенном сервисе. Стартует после запуска Service:
 ![deploy_with_svc](deploy_with_svc.png)
 
-deployment - [deploy-delay](deploy-delay.yaml)
-service - [svc-delay](svc-delay.yaml)
+[deploy-delay](deploy-delay.yaml)
+
+[svc-delay](svc-delay.yaml)
