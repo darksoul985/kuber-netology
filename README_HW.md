@@ -22,5 +22,5 @@ checker - [[checker.yaml]]
 Nginx не стартует при отключенном сервисе. Стартует после запуска Service:
 ![deploy_with_svc](deploy_with_svc.png)
 
-deployment - [[deploy-delay.yaml]]
-service - [[svc-delay.yaml]]
+deployment - [deploy-delay](deploy-delay.yaml)
+service - [svc-delay](svc-delay.yaml)
