@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: data-exchange
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: read-write-app
+  template:
+    metadata:
+      labels:
+        app: read-write-app
+    spec:
+      containers:
+      - name: busybox-input
+        image: busybox
+        command: ["/bin/sh", "-c"] 
+        args: ["echo $(date) > /var/input/data; sleep 3600"] # КЛЮЧЕВОЕ: Команда записи данных в файл в директории из секции volumeMounts контейнера
+        volumeMounts:
+        - name: read-write-vol
+          mountPath: /var/input
+      - name: busybox-output
+        image: busybox
+        command: ["/bin/sh", "-c"]
+        args: ["tail -f /var/output/data"] # КЛЮЧЕВОЕ: Команда для чтения данных из файла, расположенного в директории, указанной в volumeMounts контейнера
+        volumeMounts:
+        - name: read-write-vol
+          mountPath: /var/output
+      volumes:
+      - name: read-write-vol
+        emptyDir: {} # ИНФОРМАЦИЯ: Определяем эфемерное хранилище, которое работает только внутри пода

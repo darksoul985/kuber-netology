@@ -1,0 +1,61 @@
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: task-pv
+spec:
+  capacity:
+    storage: 1Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  hostPath:
+    path: /home/vagrant/hw_5/task2/
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: task-pvc
+spec:
+  volumeName: task-pv
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 500Mi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: data-exchange-pvc
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: task-deployment
+  template:
+    metadata:
+      labels:
+        app: task-deployment
+    spec:
+      containers:
+      - name: write-pod
+        image: busybox
+        command: ["/bin/sh", "-c"] 
+        args: ["echo $(date) > /data/input/write; sleep 3600"] # КЛЮЧЕВОЕ: Команда записи данных в файл в директории из секции volumeMounts контейнера 
+        volumeMounts:
+        - name: task-vol
+          mountPath: /data/input
+      - name: read-pod
+        image: busybox
+        command: ["/bin/sh", "-c"]
+        args: ["tail -f /data/output/write"] # КЛЮЧЕВОЕ: Команда для чтения данных из файла, расположенного в директории, указанной в volumeMounts контейнера
+        volumeMounts:
+        - name: task-vol
+          mountPath: /data/output
+      volumes:
+      - name: task-vol
+        persistentVolumeClaim:
+          claimName: task-pvc
