@@ -1,0 +1,26 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: my-app-ingress
+  annotations:
+    traefik.ingress.kubernetes.io/router.entrypoints: websecure
+    traefik.ingress.kubernetes.io/router.tls: "true"
+  namespace: netology
+spec:
+  ingressClassName: traefik
+  tls:
+    - hosts:
+        - my-app.com
+      secretName: tls-secret
+  rules:
+  - host: my-app.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: web-with-tls
+            port:
+              number: 80
