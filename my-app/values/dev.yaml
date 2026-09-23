@@ -1,0 +1,19 @@
+replicaCount: 1
+image:
+  backend:
+    repository: wbitt/network-multitool
+    tag: "3.22.2"
+
+  frontend:
+    repository: nginx
+    tag: "1.31.6"
+
+service:
+  type: NodePort
+  front_port: 80
+  front_targetPort: 80
+  back_port: 80
+  back_targetPort: 8080
+
+ingress:
+  enabled: false

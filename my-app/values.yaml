@@ -1,0 +1,45 @@
+replicaCount: 1
+
+containers:
+  backend:
+    name: multitool
+    port: 8080
+
+  frontend:
+    name: nginx
+    port: 80
+
+mountPath: /usr/share/nginx/html
+
+image:
+  pullPolicy: IfNotPresent
+  backend:
+    repository: wbitt/network-multitool
+    name: multitool
+
+  frontend:
+    repository: nginx
+    name: nginx
+
+service:
+  type: ClusterIP
+  port: 80
+
+ingress:
+  enabled: false
+  className: traefik
+  host: my-app.com
+  tls:
+    enabled: false
+    secretName: tls-secret
+
+webContent: |
+  <!DOCTYPE html>
+  <html>
+  <head>
+    <title>Эта страница из ConfigMap подключенная к Deployment</title>
+  </head>
+  <body>
+    <h1>Привет, вот и ты!</h1>
+  </body>
+  </html>

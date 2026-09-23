@@ -1,0 +1,19 @@
+replicaCount: 2
+
+image:
+  backend:
+    repository: wbitt/network-multitool
+    tag: "3.22"
+
+  frontend:
+    repository: nginx
+    tag: "1.30.5"
+
+
+ingress:
+  enabled: true
+  className: traefik
+  host: my-app.com
+  tls:
+    enabled: false
+    secretName: tls-secret
